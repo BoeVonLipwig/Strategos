@@ -1,5 +1,11 @@
+package strategos;
+
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import strategos.behaviour.BehaviourTests;
+import strategos.mapcreation.MapGenerationTests;
+import strategos.model.AllModelTests;
+import strategos.ui.UiTests;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

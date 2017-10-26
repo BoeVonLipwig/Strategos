@@ -1,4 +1,4 @@
-package noisegenerationtests;
+package strategos.mapcreation.noisegenerationtests;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

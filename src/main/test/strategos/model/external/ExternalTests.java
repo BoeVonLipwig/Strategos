@@ -1,4 +1,4 @@
-package strategos.external;
+package strategos.model.external;
 
 import org.junit.Test;
 

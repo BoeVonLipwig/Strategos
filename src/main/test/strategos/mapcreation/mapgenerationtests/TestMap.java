@@ -1,4 +1,4 @@
-package mapgenerationtests;
+package strategos.mapcreation.mapgenerationtests;
 
 //Vast amounts of this code are stolen from daniel
 class TestMap {

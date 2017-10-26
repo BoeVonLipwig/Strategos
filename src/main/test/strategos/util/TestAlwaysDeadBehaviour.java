@@ -1,4 +1,4 @@
-package util;
+package strategos.util;
 
 import strategos.util.Direction;
 import strategos.model.GameState;

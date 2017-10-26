@@ -1,6 +1,8 @@
-import mapcreation.mapgeneration.TerrainGeneration;
+package strategos;
+
 import org.junit.Test;
 import strategos.behaviour.BehaviourFactoryImpl;
+import strategos.mapcreation.mapgeneration.TerrainGeneration;
 import strategos.model.*;
 import strategos.networking.NetworkingHandler;
 import strategos.networking.handlers.NetworkingHandlerImpl;

@@ -1,8 +1,8 @@
-package mapgenerationtests;
+package strategos.mapcreation.mapgenerationtests;
 
-import mapcreation.mapgeneration.terrain.TerrainTile;
-import strategos.util.Paintable;
+import strategos.mapcreation.mapgeneration.terrain.TerrainTile;
 import strategos.terrain.Terrain;
+import strategos.util.Paintable;
 
 public class TestHex implements Paintable {
     private boolean isInPlayArea;

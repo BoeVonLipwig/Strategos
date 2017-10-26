@@ -1,8 +1,8 @@
-package mapgenerationtests;
+package strategos.mapcreation.mapgenerationtests;
 
-import mapcreation.mapgeneration.TerrainGeneration;
-import mapcreation.mapgeneration.terrain.*;
 import org.junit.Test;
+import strategos.mapcreation.mapgeneration.TerrainGeneration;
+import strategos.mapcreation.mapgeneration.terrain.*;
 
 import static org.junit.Assert.assertEquals;
 

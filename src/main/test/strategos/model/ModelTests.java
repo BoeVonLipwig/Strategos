@@ -4,12 +4,12 @@ import org.junit.Test;
 import strategos.hexgrid.Hex;
 import strategos.hexgrid.Map;
 import strategos.model.units.BridgeImpl;
-import strategos.units.Bridge;
-import strategos.util.Direction;
-import util.TestAlwaysDeadBehaviour;
-import util.TestBehaviour;
 import strategos.model.units.SwordsmenImpl;
+import strategos.units.Bridge;
 import strategos.units.Unit;
+import strategos.util.Direction;
+import strategos.util.TestAlwaysDeadBehaviour;
+import strategos.util.TestBehaviour;
 
 import java.util.ArrayList;
 import java.util.List;
