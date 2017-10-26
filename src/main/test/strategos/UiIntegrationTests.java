@@ -1,5 +1,7 @@
-import mapcreation.mapgeneration.TerrainGeneration;
+package strategos;
+
 import org.junit.Test;
+import strategos.mapcreation.mapgeneration.TerrainGeneration;
 import strategos.util.Paintable;
 import strategos.behaviour.BehaviourFactoryImpl;
 import strategos.hexgrid.Map;

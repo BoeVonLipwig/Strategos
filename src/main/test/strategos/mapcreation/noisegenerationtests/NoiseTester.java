@@ -1,9 +1,9 @@
-package noisegenerationtests;
+package strategos.mapcreation.noisegenerationtests;
 
 
-import mapcreation.mapgeneration.TerrainGeneration;
-import mapcreation.noisegeneration.NoiseGenerator;
 import org.junit.Test;
+import strategos.mapcreation.mapgeneration.TerrainGeneration;
+import strategos.mapcreation.noisegeneration.NoiseGenerator;
 
 import static junit.framework.TestCase.assertTrue;
 
@@ -86,7 +86,7 @@ public class NoiseTester {
         double[][] map = TG.testFillMap(50, 50, 1, 90, 512);
         //To physically compare to correctTopology
         PrintMap.greyImage(map);
-        double[][] testMap = noisegenerationtests.TestResources.testMap;
+        double[][] testMap = TestResources.testMap;
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[0].length; y++) {
                 assertTrue(map[x][y] == testMap[x][y]);
@@ -100,7 +100,7 @@ public class NoiseTester {
         boolean[][] forest = TG.testFillForest(50, 50, 1, 0.55);
         //To physically compare to correctForest.png
         PrintMap.greyImage(forest);
-        boolean[][] testForest = noisegenerationtests.TestResources.testForest;
+        boolean[][] testForest = TestResources.testForest;
         for (int x = 0; x< forest.length; x++) {
 //            System.out.print("{");
             for (int y = 0; y < forest[0].length; y++) {

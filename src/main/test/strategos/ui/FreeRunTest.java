@@ -1,14 +1,19 @@
-import model.*;
+package strategos.ui;
+
 import org.junit.Test;
-import strategos.model.MapLocation;
-import strategos.model.UnitOwner;
-import strategos.terrain.Terrain;
-import strategos.ui.Ui;
+import strategos.hexgrid.Hex;
+import strategos.hexgrid.Map;
+import strategos.mapcreation.mapgeneration.terrain.*;
+import strategos.model.*;
+import strategos.model.units.ArchersImpl;
+import strategos.model.units.CavalryImpl;
+import strategos.model.units.EliteImpl;
+import strategos.model.units.SpearmenImpl;
+import strategos.terrain.*;
 import strategos.units.*;
-import terrain.*;
-import units.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class FreeRunTest {
@@ -21,59 +26,52 @@ public class FreeRunTest {
         List<Unit> entities = new ArrayList<>();
         MapLocation[][] map = setupMap();
 
-        UnitOwnerTestObj owner = new UnitOwnerTestObj();
+        UnitOwner owner = new Player(false);
 
-        ArchersTestObj a = new ArchersTestObj(owner);
-        CavalryTestObj c = new CavalryTestObj(owner);
-        EliteTestObj e = new EliteTestObj(owner);
-        SpearmenTestObj s = new SpearmenTestObj(owner);
+        Archers a = new ArchersImpl(owner, new Hex(5,1, true));
+        Cavalry c = new CavalryImpl(owner, new Hex(2,1, true));
+        Elite e = new EliteImpl(owner, new Hex(2,2, true));
+        Spearmen s = new SpearmenImpl(owner, new Hex(3,3, true));
 
         owner.addUnit(a);
         owner.addUnit(c);
         owner.addUnit(e);
         owner.addUnit(s);
 
-        a.setPosition(new MapLocationTestObj(5,1));
-        c.setPosition(new MapLocationTestObj(2,1));
-        e.setPosition(new MapLocationTestObj(2,2));
-        s.setPosition(new MapLocationTestObj(3,3));
-
         entities.add(a);
         entities.add(c);
         entities.add(e);
         entities.add(s);
 
-        ModelTestObj model = new ModelTestObj();
+        Strategos model = new Strategos(null, null, null, null, null);
 
-        GameBoardTestObj gameBoardTestObj = new GameBoardTestObj();
-        GameCollectionTestObj gameCollectionTestObj = new GameCollectionTestObj();
+        Map gameBoard = new Map(10);
+        World gameCollection = new World(gameBoard, entities);
 
-        gameBoardTestObj.setData(map);
-        gameCollectionTestObj.setMap(gameBoardTestObj);
-        model.setWorld(gameCollectionTestObj);
+//        gameBoard.setData(map);
+        gameCollection.setMap(gameBoard);
+//        model.setWorld(gameCollection);
 
-        ArrayList<UnitOwner> unitOwnerTestObjs = new ArrayList<>();
-        unitOwnerTestObjs.add(owner);
-        gameCollectionTestObj.setAllUnits(owner.getUnits());
+        ArrayList<UnitOwner> unitOwners = new ArrayList<>();
+        unitOwners.add(owner);
+        gameCollection.setAllUnits(owner.getUnits());
 
-        model.setPlayers(unitOwnerTestObjs);
+//        model.setPlayers(unitOwners);
 
         ArrayList<Unit> attackRange = new ArrayList<>();
         attackRange.add(a);
         attackRange.add(c);
         attackRange.add(e);
         attackRange.add(s);
-        model.setAttackRange(attackRange);
+//        model.setAttackRange(attackRange);
 
         ArrayList<MapLocation> moveRange = new ArrayList<>();
 
-        for (int y = 0; y < map.length; y++) {
-            for (int x = 0; x < map[0].length; x++) {
-                moveRange.add(map[y][x]);
-            }
+        for (MapLocation[] aMap : map) {
+            moveRange.addAll(Arrays.asList(aMap).subList(0, map[0].length));
         }
 
-        model.setMoveRange(moveRange);
+//        model.setMoveRange(moveRange);
         model.setThisInstancePlayer(owner);
 
         Ui ui = new Ui(model);
@@ -83,22 +81,22 @@ public class FreeRunTest {
 
     public static MapLocation[][] setupMap() {
         Terrain[][] terrain = {
-                {new MountainTestObj(), new MountainTestObj(), new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj(),   new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new MountainTestObj(), new ForestTestObj(),    new ForestTestObj(),    new ForestTestObj(),    new ForestTestObj(),     new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new MountainTestObj(), new ForestTestObj(),    new ForestTestObj(),    new ForestTestObj(),    new ForestTestObj(),     new ForestTestObj(),    new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new HillTestObj(),     new HillTestObj(),      new HillTestObj(),      new HillTestObj(),      new RiverTestObj(),      new HillTestObj(),      new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new HillTestObj(),     new HillTestObj(),      new HillTestObj(),      new HillTestObj(),      new HillTestObj(),       new HillTestObj(),      new HillTestObj(),      new MountainTestObj()},
-                {new MountainTestObj(), new RiverTestObj(),    new RiverTestObj(),     new HillTestObj(),      new RiverTestObj(),      new HillTestObj(),      new HillTestObj(),      new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new MountainTestObj(), new HillTestObj(),      new HillTestObj(),      new HillTestObj(),      new HillTestObj(),       new HillTestObj(),      new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new MountainTestObj(), new PlainsTestObj(),    new PlainsTestObj(),    new PlainsTestObj(),    new PlainsTestObj(),     new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj()},
-                {new MountainTestObj(), new MountainTestObj(), new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj(),   new MountainTestObj(),  new MountainTestObj(),  new MountainTestObj()},
+                {new MountainTile(), new MountainTile(), new MountainTile(),  new MountainTile(),  new MountainTile(),  new MountainTile(),   new MountainTile(),  new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new MountainTile(), new ForestTile(),    new ForestTile(),    new ForestTile(),    new ForestTile(),     new MountainTile(),  new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new MountainTile(), new ForestTile(),    new ForestTile(),    new ForestTile(),    new ForestTile(),     new ForestTile(),    new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new HillTile(),     new HillTile(),      new HillTile(),      new HillTile(),      new RiverTile(),      new HillTile(),      new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new HillTile(),     new HillTile(),      new HillTile(),      new HillTile(),      new HillTile(),       new HillTile(),      new HillTile(),      new MountainTile()},
+                {new MountainTile(), new RiverTile(),    new RiverTile(),     new HillTile(),      new RiverTile(),      new HillTile(),      new HillTile(),      new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new MountainTile(), new HillTile(),      new HillTile(),      new HillTile(),      new HillTile(),       new HillTile(),      new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new MountainTile(), new PlainsTile(),    new PlainsTile(),    new PlainsTile(),    new PlainsTile(),     new MountainTile(),  new MountainTile(),  new MountainTile()},
+                {new MountainTile(), new MountainTile(), new MountainTile(),  new MountainTile(),  new MountainTile(),  new MountainTile(),   new MountainTile(),  new MountainTile(),  new MountainTile()},
         };
 
         MapLocation[][] map = new MapLocation[terrain.length][terrain[0].length];
 
         for (int y = 0; y < map.length; y++) {
             for (int x = 0; x < map[0].length; x++) {
-                map[y][x] = new MapLocationTestObj(x, y);
+                map[y][x] = new Hex(x, y, true);
                 map[y][x].setTerrain(terrain[y][x]);
             }
         }
